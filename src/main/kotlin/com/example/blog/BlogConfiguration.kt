@@ -13,12 +13,14 @@ class BlogConfiguration {
         userRepository: UserRepository,
         articleRepository: ArticleRepository
     ) = ApplicationRunner {
+        // この時点で自動でIDが割り当てられる
         val johnDoe = userRepository.save(User("johnDoe", "John", "Doe"))
         articleRepository.save(
             Article(
                 title = "Lorem",
                 headline = "Lorem",
                 content = "dolor sit amet",
+                // Userに自動で割り当てられたIDを取得する !!は絶対にnullではないと伝える
                 author = AggregateReference.to(johnDoe.id!!)
             )
         )

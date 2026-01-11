@@ -11,6 +11,7 @@ data class Article(
     val title: String,
     val headline: String,
     val content: String,
+    // プログラム上ではauthorという名前で扱っているが実際はauthor_idである
     @Column("author_id")
     val author: AggregateReference<User, Long>,
     val slug: String = title.toSlug(),
@@ -24,5 +25,6 @@ data class User(
     val firstname: String,
     val lastname: String,
     val description: String? = null,
+    // 重複しない識別番号であることを示す
     @Id val id: Long? = null
 )
